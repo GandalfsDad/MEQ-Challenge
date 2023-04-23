@@ -26,6 +26,9 @@ class Nodes:
     
     def __repr__(self):
         return f"Nodes({[node for node in self.__nodes.values()]})"
+    
+    def __iter__(self):
+        return (node for node in self.__nodes)
 
 
 class Node:
