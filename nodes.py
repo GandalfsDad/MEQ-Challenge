@@ -14,6 +14,10 @@ class Nodes:
         for name in names:
             self.add(Node(name))
 
+    @property
+    def complete(self):
+        return all([node.complete for node in self.__nodes.values()])
+
     def __getitem__(self, index):
         return self.__nodes[index]
     
@@ -27,6 +31,15 @@ class Nodes:
 class Node:
     def __init__(self, name):
         self.__name = name
+
+        self.__complete = False
+
+    def mark_complete(self):
+        self.__complete = True
+
+    @property
+    def complete(self):
+        return self.__complete
 
     @property
     def name(self):
