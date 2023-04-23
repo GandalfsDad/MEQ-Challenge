@@ -76,6 +76,15 @@ class Graph:
     def edge_exists(self, from_node, to_node, label):
         return len([edge for edge in self.edges if (edge.from_node == from_node) & (edge.to_node == to_node)& (edge.label == label)])>=1
 
+    def render(self, path):
+        with open(path, 'w') as f:
+            f.write("digraph {\n")
+            for edge in self.edges:
+                f.write(f"{edge.from_node.name} -> {edge.to_node.name} [label={edge.label}]\n")
+
+            f.write("}")
+
+
     @property
     def is_complete(self):
         return len(self.edges) == 3*25+1
