@@ -37,7 +37,7 @@ class Graph:
 
         return remaining
 
-    def check_completeness(self, node):
+    def get_next_direction(self, node):
         
         descendants = self.get_descendants(node)
         remaining_edges = self.remaining_edges(node)
@@ -79,8 +79,10 @@ class Graph:
     def render(self, path):
         with open(path, 'w') as f:
             f.write("digraph {\n")
-            for edge in self.edges:
-                f.write(f"{edge.from_node.name} -> {edge.to_node.name} [label={edge.label}]\n")
+            for node in self.nodes:
+                edges = self.get_descendants(self.nodes[node])
+                for edge in edges:
+                    f.write(f"{edge.from_node.name} -> {edge.to_node.name} [label={edge.label}]\n")
 
             f.write("}")
 
